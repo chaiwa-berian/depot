@@ -6,6 +6,12 @@ class ProductTest < ActiveSupport::TestCase
   # end
   fixtures :products
   
+  test "product is not valid without a unique title-I18n" do
+    product = Product.new(title: products(:ruby).title,description: "yyy", price: 1, image_url: "fred.gif")
+    assert product.invalid?
+    assert_equal[I18n.translate('errors.messages.taken')], product.errors[:title]
+  end
+
   def  new_product(image_url)
   	Product.new(title:"My Book Title", description:"yyy",price:1,image_url:image_url)
   end
@@ -16,10 +22,10 @@ class ProductTest < ActiveSupport::TestCase
 
   	ok.each do |name|
   		assert new_product(name).valid?, "#{name} should be valid"
-	end
-	bad.each do |name|
-		assert new_product(name).invalid?,"#{name} shouldn't be valid"
-	end
+	  end
+	  bad.each do |name|
+		  assert new_product(name).invalid?,"#{name} shouldn't be valid"
+	  end
   end
 
   test "product attributes must not be empty" do
