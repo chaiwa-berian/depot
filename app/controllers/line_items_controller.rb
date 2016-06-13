@@ -33,6 +33,7 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
+        session[:counter] = 0         #Reset the access counter to zero when something is added to the cart
         format.html { redirect_to @line_item, notice: 'Line item was successfully created.' }
         format.json { render :show, status: :created, location: @line_item }
       else
