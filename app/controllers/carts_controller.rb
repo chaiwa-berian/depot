@@ -2,7 +2,7 @@ class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
-   # DELETE /carts/1
+  # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
     @cart.destroy
@@ -12,7 +12,11 @@ class CartsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  # GET /carts
+  # GET /carts.json
+  def index
+    @carts = Cart.all
+  end
 
   private
     def invalid_cart
@@ -20,11 +24,7 @@ class CartsController < ApplicationController
       redirect_to store_url, notice: 'Invalid cart!'    
     end
 
-  # GET /carts
-  # GET /carts.json
-  def index
-    @carts = Cart.all
-  end
+  
 
   # GET /carts/1
   # GET /carts/1.json

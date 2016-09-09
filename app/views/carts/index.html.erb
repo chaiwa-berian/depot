@@ -8,8 +8,19 @@
   </thead>
 
   <tbody>
+    <tr>
+      <td>Cart ID</td>
+      <td>No. of items</td>
+      <td>Total Price</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
     <% @carts.each do |cart| %>
       <tr>
+        <td><%= cart.id %></td>
+        <td><%= cart.line_items.count %></td>
+        <td><%= cart.total_price %></td>
         <td><%= link_to 'Show', cart %></td>
         <td><%= link_to 'Edit', edit_cart_path(cart) %></td>
         <td><%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
