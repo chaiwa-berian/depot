@@ -1,5 +1,8 @@
 include ActionView::Helpers::TextHelper
 class StoreController < ApplicationController
+	include CurrentCart
+	before_action :set_cart
+	
  def increment_access_count
  	if session[:counter].nil? 
  		session[:counter] = 1
